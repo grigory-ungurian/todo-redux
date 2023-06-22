@@ -1,9 +1,8 @@
 import { createRoot } from "react-dom/client";
-import { Provider } from "react-redux";
-import { store } from "./store";
+import { configureStore } from "./store";
 import { createGlobalStyle } from "styled-components";
 
-import App from "./App";
+import { Root } from "./Root";
 
 const Global = createGlobalStyle`
 * {
@@ -25,12 +24,14 @@ body {
 }
 `;
 
+const store = configureStore();
+
 const rootElement = document.getElementById("root");
 const root = createRoot(rootElement);
 
 root.render(
-  <Provider store={store}>
+  <>
     <Global />
-    <App />
-  </Provider>
+    <Root store={store} />
+  </>
 );
