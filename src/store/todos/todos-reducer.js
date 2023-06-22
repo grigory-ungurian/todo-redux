@@ -1,4 +1,4 @@
-import { ADD_TODO, REMOVE_TODO, TOGGLE_TODO } from "../constants/todos-const";
+import { ADD_TODO, REMOVE_TODO, TOGGLE_TODO } from "./todos-const";
 
 // reducer
 export const todos = (state = [], { type, payload }) => {
@@ -9,8 +9,8 @@ export const todos = (state = [], { type, payload }) => {
         {
           id: Date.now(),
           title: payload.title,
-          completed: false
-        }
+          completed: false,
+        },
       ];
     }
     case REMOVE_TODO: {
@@ -21,7 +21,7 @@ export const todos = (state = [], { type, payload }) => {
         todo.id === payload.id
           ? {
               ...todo,
-              completed: !todo.completed
+              completed: !todo.completed,
             }
           : todo
       );
