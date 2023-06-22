@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import styled from "styled-components";
-import { allTodos } from "../store/selectors/todos-selectors";
+import { allTodos } from "../store/todos/todos-selectors";
 import Item from "./Item";
 
 const StyledList = styled.ul`

@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { removeTodo, toggleTodo } from "../store/actions/todos-actions";
+import { removeTodo, toggleTodo } from "../store/todos/todos-actions";
 import styled from "styled-components";
 import { ReactComponent as CloseIcon } from "../assets/svg/close.svg";
 

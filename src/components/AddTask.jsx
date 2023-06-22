@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { addTodo } from "../store/actions/todos-actions";
+import { addTodo } from "../store/todos/todos-actions";
 import styled from "styled-components";
 
 const StyledAddTask = styled.form`
