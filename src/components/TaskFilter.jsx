@@ -1,3 +1,6 @@
+import { useSelector, useDispatch } from "react-redux";
+import { selectActiveFilter } from "../store/filters/filters-selectors";
+import { setFilter } from "../store/filters/filters-actions";
 import styled from "styled-components";
 
 const StyledTaskFilterList = styled.ul`
@@ -11,7 +14,7 @@ const StyledTaskFilterList = styled.ul`
 `;
 
 const StyledTaskFilterItem = styled.li`
-  color: ${({ active }) => (active ? "#303744" : "#99a3be")};
+  color: ${({ activeFilter }) => (activeFilter ? "#303744" : "#99a3be")};
   transition: color 0.2s ease-in-out;
   cursor: pointer;
   &:hover {
@@ -20,11 +23,28 @@ const StyledTaskFilterItem = styled.li`
 `;
 
 export default function TaskFilter() {
+  const dispatch = useDispatch();
+  const activeFilter = useSelector(selectActiveFilter);
   return (
     <StyledTaskFilterList>
-      <StyledTaskFilterItem active={true}>Все</StyledTaskFilterItem>
-      <StyledTaskFilterItem>Активные</StyledTaskFilterItem>
-      <StyledTaskFilterItem>Завершенные</StyledTaskFilterItem>
+      <StyledTaskFilterItem
+        activeFilter={activeFilter === "all" ? true : false}
+        onClick={() => dispatch(setFilter("all"))}
+      >
+        Все
+      </StyledTaskFilterItem>
+      <StyledTaskFilterItem
+        activeFilter={activeFilter === "active" ? true : false}
+        onClick={() => dispatch(setFilter("active"))}
+      >
+        Активные
+      </StyledTaskFilterItem>
+      <StyledTaskFilterItem
+        activeFilter={activeFilter === "completed" ? true : false}
+        onClick={() => dispatch(setFilter("completed"))}
+      >
+        Завершенные
+      </StyledTaskFilterItem>
     </StyledTaskFilterList>
   );
 }
