@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import styled from "styled-components";
-import { allTodos } from "../store/todos/todos-selectors";
+import { selectVisibleTodos } from "../store/todos/todos-selectors";
+import { selectActiveFilter } from "../store/filters/filters-selectors";
 import Item from "./Item";
 
 const StyledList = styled.ul`
@@ -18,7 +19,8 @@ const StyledEmptyStateMessage = styled.li`
 `;
 
 export default function List() {
-  const todos = useSelector(allTodos);
+  const activeFilter = useSelector(selectActiveFilter);
+  const todos = useSelector((state) => selectVisibleTodos(state, activeFilter));
 
   if (todos.length === 0) {
     return (
