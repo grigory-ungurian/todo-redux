@@ -1,6 +1,7 @@
 import { createStore } from "redux";
 import { rootReducer } from "./rootReducer";
 import { loadState, saveState } from "./local-storage";
+import throttle from "./lodash/throttle";
 
 export const configureStore = () => {
   const persistedState = loadState();
@@ -10,8 +11,10 @@ export const configureStore = () => {
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   );
 
-  store.subscribe(() => {
-    saveState({ todos: store.getState().todos });
-  });
+  store.subscribe(
+    throttle(() => {
+      saveState({ todos: store.getState().todos });
+    }, 1000)
+  );
   return store;
 };
